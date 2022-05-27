@@ -56,6 +56,8 @@ public class Application {
   @PostMapping("/**")
   public String index(@RequestBody ArenaUpdate arenaUpdate) {
     System.out.println(arenaUpdate);
+    // self https://cloud-run-hackathon-java-springboot-k2de7pswdq-uc.a.run.app/
+    System.out.println(arenaUpdate.arena.state.get("https://cloud-run-hackathon-java-springboot-k2de7pswdq-uc.a.run.app/ "));
     String[] commands = new String[]{"F", "R", "L", "T"};
     int i = new Random().nextInt(4);
     return commands[i];
