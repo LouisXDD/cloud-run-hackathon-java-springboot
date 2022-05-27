@@ -27,6 +27,10 @@ public class Application {
     public String direction;
     public Boolean wasHit;
     public Integer score;
+
+    public String toString() {
+      return String.format("x: %d, y: %d, direction: %s, wasHit: %b, score: %d", this.x, this.y, this.direction, this.wasHit);
+    }
   }
 
   static class Arena {
@@ -61,7 +65,7 @@ public class Application {
     Arena arena = arenaUpdate.arena;
 
     System.out.println("1");
-    System.out.println(arenaUpdate.arena.state.get(links.self.href).score);
+    System.out.println(arenaUpdate.arena.state.get(links.self.href).toString());
     String[] commands = new String[]{"F", "R", "L", "T"};
     int i = new Random().nextInt(4);
     return commands[i];
