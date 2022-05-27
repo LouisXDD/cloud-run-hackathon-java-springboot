@@ -79,13 +79,17 @@ public class Application {
 
     for(int i = 0; i < enemies.size(); i++) {
       PlayerState enemy = enemies.get(i);
-      if(self.direction == "N" && (enemy.x == self.x) && (enemy.y > self.y)) {
+      if(self.direction == "N" && (enemy.x == self.x) && (enemy.y < self.y)) {
+        System.out.println("Shoot");
         return commands[3];
       } else if(self.direction == "E" && (enemy.y == self.y) && (enemy.x > self.x)) {
+        System.out.println("Shoot");
         return commands[3];
-      }  else if(self.direction == "S" && (enemy.x == self.x) && (enemy.y < self.y)) {
+      }  else if(self.direction == "S" && (enemy.x == self.x) && (enemy.y > self.y)) {
+        System.out.println("Shoot");
         return commands[3];
-      }  else if(self.direction == "W" && (enemy.y == self.y) && (enemy.y < self.y)) {
+      }  else if(self.direction == "W" && (enemy.y == self.y) && (enemy.x < self.x)) {
+        System.out.println("Shoot");
         return commands[3];
       }
     }
