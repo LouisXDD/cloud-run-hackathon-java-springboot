@@ -28,8 +28,13 @@ public class Application {
     public Boolean wasHit;
     public Integer score;
 
+    @Override
     public String toString() {
-      return String.format("x: %d, y: %d, direction: %s, wasHit: %b, score: %d", this.x, this.y, this.direction, this.wasHit);
+      return "x: " + this.x + ", " +
+              "y: " + this.y + ", " +
+              "direction: " + this.direction + ", " +
+              "wasHit: " + this.wasHit + ", " +
+              "score: " + this.score;
     }
   }
 
@@ -60,7 +65,7 @@ public class Application {
   @PostMapping("/**")
   public String index(@RequestBody ArenaUpdate arenaUpdate) {
     System.out.println(arenaUpdate);
-    // self https://cloud-run-hackathon-java-springboot-k2de7pswdq-uc.a.run.app/
+
     Links links = arenaUpdate._links;
     Arena arena = arenaUpdate.arena;
 
