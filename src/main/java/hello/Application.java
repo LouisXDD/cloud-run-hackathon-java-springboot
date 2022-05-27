@@ -13,6 +13,8 @@ import java.util.Random;
 @RestController
 public class Application {
 
+  private String[] commands = new String[]{"F", "R", "L", "T"};
+
   static class Self {
     public String href;
   }
@@ -64,17 +66,52 @@ public class Application {
 
   @PostMapping("/**")
   public String index(@RequestBody ArenaUpdate arenaUpdate) {
-    System.out.println(arenaUpdate);
 
     Links links = arenaUpdate._links;
-    Arena arena = arenaUpdate.arena;
+    Arena _arena = arenaUpdate.arena;
+    List<Integer> _dims = _arena.dims;
 
-    System.out.println("1");
-    System.out.println(arenaUpdate.arena.state.get(links.self.href).toString());
-    String[] commands = new String[]{"F", "R", "L", "T"};
-    int i = new Random().nextInt(4);
-    return commands[i];
+    PlayerState self = _arena.state.get(links.self.href);
+    Map<String, PlayerState> enemies = _arena.state;
+    enemies.remove(links.self.href);
+
+    System.out.println(self.toString());
+
+    for(int i = 0; i < enemies.size(); i++) {
+      PlayerState enemy = enemies.get(i);
+      if(self.direction == "N" && (enemy.x == self.x) && (enemy.y > self.y)) {
+        return commands[3];
+      } else if(self.direction == "E" && (enemy.y == self.y) && (enemy.x > self.x)) {
+        return commands[3];
+      }  else if(self.direction == "S" && (enemy.x == self.x) && (enemy.y < self.y)) {
+        return commands[3];
+      }  else if(self.direction == "W" && (enemy.y == self.y) && (enemy.y < self.y)) {
+        return commands[3];
+      }
+    }
+
+    int random = new Random().nextInt(3);
+    return commands[random];
   }
-
 }
+//{
+//        "_links": {
+//          "self": {
+//            "href": "https://YOUR_SERVICE_URL"
+//          }
+//        },
+//        "arena": {
+//          "dims": [4,3], // width, height
+//          "state": {
+//            "https://A_PLAYERS_URL": {
+//              "x": 0, // zero-based x position, where 0 = left
+//              "y": 0, // zero-based y position, where 0 = top
+//              "direction": "N", // N = North, W = West, S = South, E = East
+//              "wasHit": false,
+//              "score": 0
+//            }
+//            ... // also you and the other players
+//         }
+//   }
+//}
 
