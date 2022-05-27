@@ -60,8 +60,8 @@ public class Application {
     Links links = arenaUpdate._links;
     Arena arena = arenaUpdate.arena;
 
-
-    System.out.println(arenaUpdate.arena.state.get(links.self.href));
+    System.out.println("1");
+    System.out.println(arenaUpdate.arena.state.get(links.self.href).score);
     String[] commands = new String[]{"F", "R", "L", "T"};
     int i = new Random().nextInt(4);
     return commands[i];
